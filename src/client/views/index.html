@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <!-- To enable responsiveness via media queries: -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Travel Planner</title>
+        <link href="../styles/style.scss" rel="stylesheet">
+        <script>
+            const buildForm = async () => {
+                const req = await fetch('https://pkgstore.datahub.io/core/country-list/data_json/data/8c458f2d15d9f2119654b29ede6e45b8/data_json.json');
+                try {
+                    const data = await req.json()
+                    .then(data => {
+                        const dropdown = document.querySelector('#countries');
+                        data.forEach(entry => {
+                            const newOption = document.createElement('option');
+                            newOption.setAttribute('value', entry["Name"]);
+                            newOption.setAttribute('data-country-code', entry["Code"]);
+                            newOption.setAttribute('id', `${entry["Name"]}_option`);
+                            dropdown.appendChild(newOption);
+                        });
+                    });
+                let today = new Date();
+                let date_max_forecast = new Date();
+                date_max_forecast.setDate(today.getDate() + 15);
+                date_max_forecast = date_max_forecast.toISOString().substr(0, 10);
+                today = today.toISOString().substr(0, 10);
+                document.querySelector("#travel-date").value = today;
+                document.querySelector("#travel-date").min = today;
+                document.querySelector("#travel-date").max = date_max_forecast;
+                } catch(error) {
+                    console.log("error", error);
+                }
+            }
+            document.addEventListener('DOMContentLoaded', buildForm);
+        </script>
+        </head>
+    <body>
+        <div id="page-container"> 
+            <header id="header">
+                <h1>Travel Planner App</h1>
+            </header>
+            <main>
+                <div id="card">
+                    <h2>Plan Your Next Trip</h2>
+                    <div id="card-main">
+                        <!-- Free placeholder image downloaded via: https://picsum.photos/images -->
+                        <img id="image" src="../media/placeholder-img.jpeg" alt="Placeholder Image">
+                        <div id="form-group">
+                            <h3>Enter Your Travel Details:</h3>
+                            <input class="form-element" id="country" list="countries" name="country" placeholder="Country" required>
+                            <datalist id="countries"></datalist>
+                            <input type="text" class="form-element" id="city" name="city" placeholder="City" required>
+                            <label for="travel-date" class="form-label">Travel date:</label>
+                            <input type="date" class="form-element" id="travel-date" name="travel-date" required>
+                            <input type="submit" class="form-element submit" id="submit">
+                        </div>
+                        <div id="results">
+                            <div id="results-cover">
+                                <h3>Weather forecast | powered by:</h3>
+                                <hr>
+                                <br>
+                                <a href="https://www.weatherbit.io/" target="_blank">
+                                    <img src="../media/weatherbit-logo.png" alt="Weatherbit.io Logo">
+                                </a>
+                            </div>
+                            <table class="forecast-table">
+                                <thead>
+                                    <tr>
+                                        <th>Day</th>
+                                        <th>Conditions</th>
+                                        <th>High (F)</th>
+                                        <th>Low (F)</th>
+                                        <th>Precip</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="results-table-body"></tbody>
+                            </table>
+                            <div id="current-weather">
+                                <div id="current-main">
+                                    <div id="current-temp"></div>
+                                    <div id="current-description"></div>
+                                </div>
+                                <div id="current-sunrise" class="current-weather-detail">Sunrise</div>
+                                <div id="current-sunset" class="current-weather-detail">Sunset</div>
+                                <div id="current-humidity" class="current-weather-detail">Humidity</div>
+                                <div id="current-clouds" class="current-weather-detail">Cloud coverage</div>
+                                <div id="current-wind" class="current-weather-detail">Wind speed</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <footer id="footer">
+                <p>&copy;
+                    <a href="https://github.com/astorz/" target="_blank">Andreas Storz</a>
+                </p>
+            </footer>
+        </div>
+        <script src="../js/app.js" type="text/javascript"></script>
+    </body>
+</html>
