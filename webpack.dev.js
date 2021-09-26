@@ -5,7 +5,6 @@ const { merge } = require('webpack-merge');
 
 module.exports = merge(common, {
     mode: 'development',
-    devtool: 'source-map',
     stats: 'verbose',
     output: {
         filename: "main.js",
@@ -20,5 +19,4 @@ module.exports = merge(common, {
         ]
     }
 });
-
 

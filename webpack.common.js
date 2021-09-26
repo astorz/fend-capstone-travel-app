@@ -4,6 +4,9 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: './src/client/index.js',
+    output: {
+        assetModuleFilename: "media/[name][ext]",
+    },
     module: {
         rules: [
             {
@@ -17,14 +20,8 @@ module.exports = {
             },
             {
                 test: /\.(svg|png|jpg|jpeg|gif)$/,
-                use: {
-                    loader: "file-loader",
-                    options: {
-                        name: "[name].[hash].[ext]",
-                        outputPath: "imgs"
-                    }
-                }
-            }
+                type: "asset/resource",
+            },
         ]
     },
     plugins: [ 
