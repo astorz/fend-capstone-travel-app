@@ -6,36 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Travel Planner</title>
         <link href="../styles/style.scss" rel="stylesheet">
-        <script>
-            const buildForm = async () => {
-                const req = await fetch('https://pkgstore.datahub.io/core/country-list/data_json/data/8c458f2d15d9f2119654b29ede6e45b8/data_json.json');
-                try {
-                    const data = await req.json()
-                    .then(data => {
-                        const dropdown = document.querySelector('#countries');
-                        data.forEach(entry => {
-                            const newOption = document.createElement('option');
-                            newOption.setAttribute('value', entry["Name"]);
-                            newOption.setAttribute('data-country-code', entry["Code"]);
-                            newOption.setAttribute('id', `${entry["Name"]}_option`);
-                            dropdown.appendChild(newOption);
-                        });
-                    });
-                let today = new Date();
-                let date_max_forecast = new Date();
-                date_max_forecast.setDate(today.getDate() + 15);
-                date_max_forecast = date_max_forecast.toISOString().substr(0, 10);
-                today = today.toISOString().substr(0, 10);
-                document.querySelector("#travel-date").value = today;
-                document.querySelector("#travel-date").min = today;
-                document.querySelector("#travel-date").max = date_max_forecast;
-                } catch(error) {
-                    console.log("error", error);
-                }
-            }
-            document.addEventListener('DOMContentLoaded', buildForm);
-        </script>
-        </head>
+    </head>
     <body>
         <div id="page-container"> 
             <header id="header">
@@ -55,6 +26,7 @@
                             <label for="travel-date" class="form-label">Travel date:</label>
                             <input type="date" class="form-element" id="travel-date" name="travel-date" required>
                             <input type="submit" class="form-element submit" id="submit">
+                            <button id="reload">Reset</button>
                         </div>
                         <div id="results">
                             <div id="results-cover">
@@ -98,6 +70,7 @@
                 </p>
             </footer>
         </div>
-        <script src="../js/app.js" type="text/javascript"></script>
+        <!-- Implemented fix below based on: https://stackoverflow.com/questions/38296667/getting-unexpected-token-export -->
+        <script src="../js/app.js" type="module"></script>
     </body>
 </html>

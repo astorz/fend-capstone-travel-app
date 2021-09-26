@@ -119,6 +119,29 @@ main {
     color: ivory;
 }
 
+.form-element.submit:hover {
+    background-color: darkblue;
+}
+
+#reload {
+    margin: 10px;
+    width: 120px;
+    height: 30px;
+    font-size: 15px;
+    border-radius: 15px;
+    border: darkgray;
+    border-style: solid;
+    border-width: thin;
+    background-color: white;
+    color: darkgray;
+}
+
+#reload:hover {
+    color: ivory;
+    background-color: darkgray;
+    border: none;
+}
+
 /* Styling for results section below */
 #results {
     text-align: center;

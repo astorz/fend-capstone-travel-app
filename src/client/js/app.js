@@ -15,6 +15,8 @@ const keyPixabayAPI = '21879054-7849db0979c379d492c58f526';
 
 // Callback function to be executed on click
 export const mainFunction = () => {
+    cleanElem('#results-table-body');
+    cleanElem('#current-description');
     let country = document.getElementById('country').value;
     const countryList = document.getElementById('countries');
     const country_code = document.getElementById(`${country}_option`).getAttribute('data-country-code');
@@ -65,6 +67,7 @@ export const mainFunction = () => {
                 wind.innerHTML = `Wind: ${weather["data"][0]["wind_cdir"]} ${Math.round(weather["data"][0]["wind_spd"] * 2.236936)} mph`;
                 
                 document.querySelector('#results-cover').style.display = 'none';
+                document.querySelector('.forecast-table').style.display = 'none';
                 document.querySelector('#current-weather').style.display = 'block';
             })
             // Check later: do i need line below (i.e. return data)?
@@ -111,6 +114,7 @@ export const mainFunction = () => {
 
                     document.querySelector('#results-table-body').appendChild(tableRow);
                     document.querySelector('#results-cover').style.display = 'none';
+                    document.querySelector('#current-weather').style.display = 'none';
                     document.querySelector('.forecast-table').style.display = 'table';
                 });
             })
@@ -199,4 +203,41 @@ const toLocal = (time, tz) => {
         formatter = new Intl.DateTimeFormat([], options);
     
     return formatter.format(time).split(',')[1].trim();
+}
+
+// Helper function to clean table (removes rows) on 'submit'
+const cleanElem = (id) => {
+    const elem = document.querySelector(id);
+    elem.innerHTML = '';
+}
+
+export const reload = () => {
+    reload = location.reload();
+}
+
+export const buildForm = async () => {
+    const req = await fetch('https://pkgstore.datahub.io/core/country-list/data_json/data/8c458f2d15d9f2119654b29ede6e45b8/data_json.json');
+    try {
+        const data = await req.json()
+        .then(data => {
+            const dropdown = document.querySelector('#countries');
+            data.forEach(entry => {
+                const newOption = document.createElement('option');
+                newOption.setAttribute('value', entry["Name"]);
+                newOption.setAttribute('data-country-code', entry["Code"]);
+                newOption.setAttribute('id', `${entry["Name"]}_option`);
+                dropdown.appendChild(newOption);
+            });
+        });
+    let today = new Date();
+    let date_max_forecast = new Date();
+    date_max_forecast.setDate(today.getDate() + 15);
+    date_max_forecast = date_max_forecast.toISOString().substr(0, 10);
+    today = today.toISOString().substr(0, 10);
+    document.querySelector("#travel-date").value = today;
+    document.querySelector("#travel-date").min = today;
+    document.querySelector("#travel-date").max = date_max_forecast;
+    } catch(error) {
+        console.log("error", error);
+    }
 }
