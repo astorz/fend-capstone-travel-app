@@ -17,10 +17,28 @@ const keyPixabayAPI = '21879054-7849db0979c379d492c58f526';
 export const mainFunction = () => {
     cleanElem('#results-table-body');
     cleanElem('#current-description');
-    let country = document.getElementById('country').value;
+
+    // Country input validation
     const countryList = document.getElementById('countries');
+    const countriesCheck = [];
+    const countryListChildren = countryList.children;
+    for (const country of countryListChildren) {
+        countriesCheck.push(country.value);
+    }
+    let country = document.getElementById('country').value;
+    if(!countriesCheck.includes(country)){
+        alert("Not a valid country");
+        return;
+    }
     const country_code = document.getElementById(`${country}_option`).getAttribute('data-country-code');
     let cityName = document.getElementById('city').value;
+    
+    // City input validation
+    if(cityName == "") {
+        alert('"City" cannot be empty');
+        return;
+    }
+
     // Cleaning city name for input to APIs
     let city = cityName.trim();
     city = city.toLowerCase();
