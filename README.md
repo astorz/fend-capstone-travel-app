@@ -11,12 +11,18 @@ The app uses common web technologies, i.e. HMTL/CSS/JavaScript. In addition, it 
 In terms of data sources, the app uses 3 external APIs. The (1) Geonames API retrieves the specific coordinates (latitude/longitude) for the travel destination needed to retrieve weather details for the specific location from the (2) Weatherbit API. Lastly, an image for the travel destination is retrieved via the (3) Pixabay API.
 
 ### "Extend your Project/Ways to Stand Out"
-The Capstone project asks students to implement at least one of a list of optional features to extend the project and its functionality. This project implements 3 of the suggested additional features:
+The Capstone project asks students to implement *at least one* of a list of optional features to extend the project and its functionality. This project implements 3 of the suggested additional features:
 
-- l;ksjdf
-- ;ljsdf 
-- ;lkjsdf
+- Pull in an image for the country from Pixabay API when the entered location brings up no results (good for obscure localities).
+- Incorporate icons into forecast [the project shows weather icons that summarize weather conditions].
+- Instead of just pulling a single day forecast, pull the forecast for multiple days. [This is implemented in cases where the travel date is more than 1 week away.]
 
 ## Using the repo
-;lskjdf
+Developers can rebuild and use the code by cloning this repo. Webpack and all dependencies (cf. "package.json" file) need to be installed. Running "npm run build" creates a "dist" folder with the code for the production environment.
 ### Dependencies
+Usage requires registering for each of the 3 WebAPIs. Each API requires having an account name and an API key. 
+
+Please refer to the documentation for further details: 
+- Geonames API: http://www.geonames.org/export/web-services.html
+- Weatherbit API: https://www.weatherbit.io/api
+- Pixabay API: https://pixabay.com/api/docs/
