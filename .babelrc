@@ -1,1 +1,12 @@
-{‘presets’: ['@babel/preset-env']} // presets for ES6
+{
+    "presets": [
+      [
+        "@babel/env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ]
+  }
