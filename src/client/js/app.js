@@ -52,6 +52,11 @@ export const mainFunction = () => {
 
     geonamesAPI(baseUrlGeonames, city, country_code, userGeonames)
     .then(function(data){
+        // Validation: Length of Geonames return object must be greater than 0
+        if(data.totalResultsCount == 0) {
+            alert('"City" not recognized. Please check your entry or try another city nearby');
+            return;
+        }
         // Using first entry for city, getting latitude and longitude details
         const lat = data["geonames"][0]["lat"];
         const lng = data["geonames"][0]["lng"];
@@ -138,15 +143,18 @@ export const mainFunction = () => {
             })
         };
     })
-     
-    document.getElementsByTagName('h2')[0].innerHTML = `Weather conditions for your upcoming trip to ${cityName.trim()}, ${country.trim()}`;
-    
-    pixabayAPI(baseUrlPixabayAPI, keyPixabayAPI, pixabaySearchTerm)
+
     .then(function(data){
-        // Selecting random number from returned array
-        // Code example from: https://stackoverflow.com/questions/4550505/getting-a-random-value-from-a-javascript-array
-        const random = Math.floor(Math.random() * data["hits"].length);
-        document.querySelector("#image").setAttribute('src', data["hits"][random]["webformatURL"]);
+        // Changing heading dynamically based on location entry
+        document.getElementsByTagName('h2')[0].innerHTML = `Weather conditions for your upcoming trip to ${cityName.trim()}, ${country.trim()}`;
+        // Calling Pixabay API to retrieve image url
+        pixabayAPI(baseUrlPixabayAPI, keyPixabayAPI, pixabaySearchTerm)
+        .then(function(data){
+            // Selecting random number from returned array
+            // Code example from: https://stackoverflow.com/questions/4550505/getting-a-random-value-from-a-javascript-array
+            const random = Math.floor(Math.random() * data["hits"].length);
+            document.querySelector("#image").setAttribute('src', data["hits"][random]["webformatURL"]);
+        })
     })
 };
 
