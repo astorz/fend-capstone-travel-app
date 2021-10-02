@@ -54,7 +54,7 @@ export const mainFunction = () => {
     .then(function(data){
         // Validation: Length of Geonames return object must be greater than 0
         if(data.totalResultsCount == 0) {
-            alert('"City" not recognized. Please check your entry or try another city nearby');
+            alert('"City" not recognized. Please check your entry or try a different city nearby');
             return;
         }
         // Using first entry for city, getting latitude and longitude details
@@ -144,17 +144,26 @@ export const mainFunction = () => {
         };
     })
 
+    // Changing heading dynamically based on location entry
+    document.getElementsByTagName('h2')[0].innerHTML = `Weather conditions for your upcoming trip to ${cityName.trim()}, ${country.trim()}`;
+    // Calling Pixabay API to retrieve image url
+    pixabayAPI(baseUrlPixabayAPI, keyPixabayAPI, pixabaySearchTerm)
     .then(function(data){
-        // Changing heading dynamically based on location entry
-        document.getElementsByTagName('h2')[0].innerHTML = `Weather conditions for your upcoming trip to ${cityName.trim()}, ${country.trim()}`;
-        // Calling Pixabay API to retrieve image url
-        pixabayAPI(baseUrlPixabayAPI, keyPixabayAPI, pixabaySearchTerm)
-        .then(function(data){
+        // Testing if Pixabay found at least 1 image result
+        // If not, will use random result only for Country (in else clause)
+        // console.log(data["hits"]);
+        if(data.totalHits > 0) {
             // Selecting random number from returned array
             // Code example from: https://stackoverflow.com/questions/4550505/getting-a-random-value-from-a-javascript-array
             const random = Math.floor(Math.random() * data["hits"].length);
             document.querySelector("#image").setAttribute('src', data["hits"][random]["webformatURL"]);
-        })
+        } else {
+            pixabayAPI(baseUrlPixabayAPI, keyPixabayAPI, countryClean)
+            .then(function(data){
+                const random = Math.floor(Math.random() * data["hits"].length);
+                document.querySelector("#image").setAttribute('src', data["hits"][random]["webformatURL"]);
+            })
+        }
     })
 };
 
@@ -181,8 +190,6 @@ const weatherbitApi = async(base, lat, lng, key) => {
     const res = await fetch(searchString);
     try {
         const weatherData = await res.json();
-        // console.log(typeof(weatherData["data"][0]["datetime"]));
-        // console.log(Date.parse(weatherData["data"][0]["datetime"]));
         return weatherData;
     } catch(error){
         console.log('error', error);
