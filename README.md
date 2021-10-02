@@ -2,7 +2,7 @@
 This repo holds the code for a simple "Travel App" that was developed as the Capstone project of [Udacity's Frontend Developer Program](https://www.udacity.com/course/front-end-web-developer-nanodegree--nd0011). 
 
 ## Features
-The project is a simple single-page app that provides weather details for a specific location based on a user's entry for a specific travel destination (i.e. country and city). If the travel date is within one week, the app display current weather conditions. If the travel date is more than one week in the future, it provides a weather forecast for the specific travel period (up to 2 weeks ahead).
+The project is a simple single-page app that provides weather details for a specific location based on a user's entry for a specific travel destination (i.e. country and city) and travel date. If the travel date is within one week, the app display current weather conditions. If the travel date is more than one week in the future, it provides a weather forecast for the specific travel period (up to 2 weeks ahead).
 The app also shows an image for the specific destination.
 
 ## Implementation
