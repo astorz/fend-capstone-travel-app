@@ -9,15 +9,15 @@ module.exports = {
     },
     module: {
         rules: [
-            {
-                test: '/\.js$/',
-                exclude: /node_modules/,
-                loader: "babel-loader"
-            },
-            {
-                test: /\.html$/,
-                use: ["html-loader"]
-            },
+            // {
+            //     test: '/\.js$/',
+            //     exclude: /node_modules/,
+            //     loader: "babel-loader"
+            // },
+            // {
+            //     test: /\.html$/,
+            //     use: ["html-loader"]
+            // },
             {
                 test: /\.(svg|png|jpg|jpeg|gif)$/,
                 type: "asset/resource",

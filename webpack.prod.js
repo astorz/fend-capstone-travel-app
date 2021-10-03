@@ -10,7 +10,7 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
 module.exports = merge(common, {
     mode: 'production',
     output: {
-        filename: "main.[contentHash].js",
+        filename: "main.[contenthash].js",
         path: path.resolve(__dirname, "dist")
     },
     module: {
@@ -31,7 +31,7 @@ module.exports = merge(common, {
             cleanStaleWebpackAssets: true,
             protectWebpackAssets: false
         }),
-        new MiniCssExtractPlugin({ filename: "[name].[contentHash].css" }),
+        new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" }),
         new WorkboxPlugin.GenerateSW()
     ],
     optimization: {

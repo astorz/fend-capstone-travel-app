@@ -73,8 +73,9 @@
             </footer>
         </div>
         <!-- Implemented fix below based on: https://stackoverflow.com/questions/38296667/getting-unexpected-token-export -->
-        <script src="../js/app.js" type="module">
-             // Check that service workers are supported
+        <script src="../js/app.js" type="module"></script>
+        <script>
+            // Check that service workers are supported
             if ('serviceWorker' in navigator) {
                 // Use the window load event to keep the page load performant
                 window.addEventListener('load', () => {
