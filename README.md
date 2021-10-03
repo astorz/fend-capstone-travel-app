@@ -20,7 +20,7 @@ The Capstone project asks students to implement *at least one* of a list of opti
 ## Using the repo
 Developers can rebuild and use the code by cloning this repo. Webpack and all dependencies (cf. "package.json" file) need to be installed. Running "npm run build" creates a "dist" folder with the code for the production environment.
 ### Dependencies
-Usage requires registering for each of the 3 WebAPIs. Each API requires having an account name and an API key. 
+Usage requires registering for each of the 3 WebAPIs. Each API requires having an API key (associated with an account).
 
 Please refer to the documentation for further details: 
 - Geonames API: http://www.geonames.org/export/web-services.html
