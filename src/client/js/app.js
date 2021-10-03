@@ -99,8 +99,6 @@ export const mainFunction = () => {
             weatherbitApi(baseUrlForecastWeather, data["lat"], data["lng"], keyWeatherbitAPI)
             .then(function(data){
                 const weather = data["data"].slice(8 + (daysToTrip(travelDate, data["data"][0]["datetime"]) - 8));
-
-                console.log(data);
                 // change above later to pick up to 8 forecast days
                 weather.forEach(data => {
                     const tableRow = document.createElement('tr');
@@ -110,7 +108,6 @@ export const mainFunction = () => {
                     const date_parts = data["valid_date"].split('-');
                     const datetime_str = new Date(date_parts[0], date_parts[1] - 1, date_parts[2]).toDateString(); 
                     const date_str = datetime_str.slice(0, datetime_str.length - 5);
-                    // console.log(typeof(date_str));
                     date.innerHTML = date_str;
                     tableRow.appendChild(date);
                     // Inserting weather conditions
@@ -152,7 +149,6 @@ export const mainFunction = () => {
         .then(function(data){
             // Testing if Pixabay found at least 1 image result
             // If not, will use random result only for Country (in else clause)
-            // console.log(data["hits"]);
             if(data.totalHits > 0) {
                 // Selecting random number from returned array
                 // Code example from: https://stackoverflow.com/questions/4550505/getting-a-random-value-from-a-javascript-array
