@@ -14,7 +14,7 @@ In terms of data sources, the app uses 3 external APIs. The (1) Geonames API ret
 The Capstone project asks students to implement *at least one* of a list of optional features to extend the project and its functionality. This project implements 3 of the suggested additional features:
 
 - Pull in an image for the country from Pixabay API when the entered location brings up no results (good for obscure localities).
-- Incorporate icons into forecast [the project shows weather icons that summarize weather conditions].
+- Incorporate icons into forecast [the project shows weather icons that illustrate weather conditions].
 - Instead of just pulling a single day forecast, pull the forecast for multiple days. [This is implemented in cases where the travel date is more than 1 week away.]
 
 ## Using the repo
