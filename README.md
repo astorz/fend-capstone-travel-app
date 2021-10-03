@@ -22,7 +22,7 @@ Developers can rebuild and use the code by cloning this repo. Webpack and all de
 ### Dependencies
 Usage requires registering for each of the 3 WebAPIs. Each API requires having an API key (associated with an account).
 
-Please refer to the documentation for further details: 
+Please refer to the APIs' documentation for further details: 
 - Geonames API: http://www.geonames.org/export/web-services.html
 - Weatherbit API: https://www.weatherbit.io/api
 - Pixabay API: https://pixabay.com/api/docs/
