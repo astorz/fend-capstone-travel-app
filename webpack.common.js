@@ -5,7 +5,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: './src/client/index.js',
     output: {
-        assetModuleFilename: "media/[name][ext]",
+        assetModuleFilename: "images/[name][ext]",
     },
     module: {
         rules: [
@@ -14,14 +14,14 @@ module.exports = {
             //     exclude: /node_modules/,
             //     loader: "babel-loader"
             // },
-            // {
-            //     test: /\.html$/,
-            //     use: ["html-loader"]
-            // },
+            {
+                test: /\.html$/,
+                use: ["html-loader"]
+            },
             {
                 test: /\.(svg|png|jpg|jpeg|gif)$/,
                 type: "asset/resource",
-            },
+            }
         ]
     },
     plugins: [ 
